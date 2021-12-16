@@ -6,7 +6,7 @@ import java.util.*;
 
 public class ListProcessing {
 
-   public static List<Integer> createNewList(List<Integer> list) {
+    public static List<Integer> createNewList(List<Integer> list) {
         MaxSumRange maxSumIndex = MaxSumRange.ListIndex(list);
         int startIndex = maxSumIndex.start;
         int endIndex = maxSumIndex.end;
@@ -19,9 +19,9 @@ public class ListProcessing {
                 newList.add(list.get(index));
             }
         }
+
         return newList;
     }
-
 
 
     public static void readList(List<Integer> list) {

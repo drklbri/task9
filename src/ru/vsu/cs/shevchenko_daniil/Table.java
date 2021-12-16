@@ -69,16 +69,13 @@ public class Table extends JFrame {
                 SwingUtils.showErrorMessageBox(a);
             }
         });
-       solutionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    int[] array = JTableUtils.readIntArrayFromJTable(inTable);
-                    array = ListProcessing.fromListToIntArray(ListProcessing.createNewList(ListProcessing.intArrayToList(array)));
-                    JTableUtils.writeArrayToJTable(outTable, array);
-                } catch (Exception e) {
-                    SwingUtils.showErrorMessageBox(e);
-                }
+        solutionButton.addActionListener(actionEvent -> {
+            try {
+                int[] array = JTableUtils.readIntArrayFromJTable(inTable);
+                array = ListProcessing.fromListToIntArray(ListProcessing.createNewList(ListProcessing.intArrayToList(array)));
+                JTableUtils.writeArrayToJTable(outTable, array);
+            } catch (Exception e) {
+                SwingUtils.showErrorMessageBox(e);
             }
         });
         saveButton.addActionListener(actionEvent -> {

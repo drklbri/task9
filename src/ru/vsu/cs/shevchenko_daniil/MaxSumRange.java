@@ -12,21 +12,21 @@ public class MaxSumRange {
     }
 
     public static MaxSumRange ListIndex(List<Integer> list) {
-       int currSum = 0;
-       int startIndex = 0;
-       MaxSumRange maxSumRange = null;
+        int currSum = 0;
+        int startIndex = 0;
+        MaxSumRange maxSumRange = null;
 
-       for (int endIndex = 0; endIndex < list.size(); endIndex++) {
-           currSum += list.get(endIndex);
+        for (int endIndex = 0; endIndex < list.size(); endIndex++) {
+            currSum += list.get(endIndex);
 
-           if (maxSumRange == null || currSum > maxSumRange.sum)
-               maxSumRange = new MaxSumRange(startIndex, endIndex, currSum);
+            if (maxSumRange == null || currSum > maxSumRange.sum)
+                maxSumRange = new MaxSumRange(startIndex, endIndex, currSum);
 
-           if (currSum < 0) {
-               currSum = 0;
-               startIndex = endIndex + 1;
-           }
-       }
-       return maxSumRange;
+            if (currSum < 0) {
+                currSum = 0;
+                startIndex = endIndex + 1;
+            }
+        }
+        return maxSumRange;
     }
 }
