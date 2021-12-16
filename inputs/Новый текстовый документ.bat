@@ -1,0 +1,1 @@
+FOR /F %%i in (create.txt) do cd. > %%i
