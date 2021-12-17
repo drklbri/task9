@@ -1,6 +1,5 @@
 package ru.vsu.cs.shevchenko_daniil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MaxSumRange {
@@ -12,17 +11,24 @@ public class MaxSumRange {
         this.sum = sum;
     }
 
-    public static List<Integer> ListIndex(List<Integer> list) {
+    public static MaxSumRange ListIndex(List<Integer> list) {
         int currSum = 0;
         int startIndex = 0;
+        int maxSum = maxSumInSubArray(list);
         MaxSumRange maxSumRange = null;
-        int maxSum = maxSumOfSubArray(list);
-        List<Integer> tempList = new ArrayList<>();
 
         for (int endIndex = 0; endIndex < list.size(); endIndex++) {
             currSum += list.get(endIndex);
 
-            if (maxSumRange == null || currSum > maxSumRange.sum) {
+            if (maxSumRange == null || currSum >= maxSumRange.sum) {
+                try {
+                    if (currSum == maxSum) {
+                        if (endIndex - startIndex == maxSumRange.end - maxSumRange.start && maxSumRange.end != endIndex)
+                            continue;
+                    }
+                } catch (NullPointerException exception) {
+                    maxSumRange = new MaxSumRange(0, 0, list.get(1));
+                }
                 maxSumRange = new MaxSumRange(startIndex, endIndex, currSum);
             }
 
@@ -30,22 +36,18 @@ public class MaxSumRange {
                 currSum = 0;
                 startIndex = endIndex + 1;
             }
-            if (currSum == maxSum) {
-                tempList.add(startIndex);
-                tempList.add(endIndex);
-            }
         }
-        return tempList;
+        return maxSumRange;
     }
 
-    public static int maxSumOfSubArray(List<Integer> list) {
-        int currSum = 0;
+    public static int maxSumInSubArray(List<Integer> list) {
         int maxSum = 0;
-        for (int number : list) {
-            currSum = Math.max(0, number+currSum);
-            maxSum = Math.max(currSum,maxSum);
+        int currSum = 0;
+
+        for (int numbers : list) {
+            currSum = Math.max(0, numbers + currSum);
+            maxSum = Math.max(currSum, maxSum);
         }
         return maxSum;
     }
-
 }

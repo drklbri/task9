@@ -7,27 +7,18 @@ import java.util.*;
 public class ListProcessing {
 
     public static List<Integer> createNewList(List<Integer> list) {
+        MaxSumRange maxSumIndex = MaxSumRange.ListIndex(list);
+        int startIndex = maxSumIndex.start;
+        int endIndex = maxSumIndex.end;
 
-        List<Integer> tempList = MaxSumRange.ListIndex(list);
         List<Integer> newList = new ArrayList<>();
 
-        int[] shortestSubArray = new int[2];
-        int minDist = 10000;
-
-        for (int i = 1; i < tempList.size(); i += 2) {
-            if ((i) - (i - 1) < minDist) {
-                minDist = tempList.get(i) - tempList.get(i-1);
-                shortestSubArray[0] = tempList.get(i-1);
-                shortestSubArray[1] = tempList.get(i);
-            }
-        }
 
         for (int index = 0; index < list.size(); index++) {
-            if (shortestSubArray[0] <= index && index <= shortestSubArray[1]) {
+            if (startIndex <= index && index <= endIndex) {
                 newList.add(list.get(index));
             }
         }
-
         return newList;
     }
 
