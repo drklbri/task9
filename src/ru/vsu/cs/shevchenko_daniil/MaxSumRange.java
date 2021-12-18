@@ -21,14 +21,8 @@ public class MaxSumRange {
             currSum += list.get(endIndex);
 
             if (maxSumRange == null || currSum >= maxSumRange.sum) {
-                try {
-                    if (currSum == maxSum) {
-                        if (endIndex - startIndex == maxSumRange.end - maxSumRange.start && maxSumRange.end != endIndex)
-                            continue;
-                    }
-                } catch (NullPointerException exception) {
-                    maxSumRange = new MaxSumRange(0, 0, list.get(1));
-                }
+                if (currSum == maxSum && maxSumRange != null && endIndex - startIndex == maxSumRange.end - maxSumRange.start && maxSumRange.end != endIndex)
+                    continue;
                 maxSumRange = new MaxSumRange(startIndex, endIndex, currSum);
             }
 
