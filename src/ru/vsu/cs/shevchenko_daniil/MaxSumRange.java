@@ -1,5 +1,8 @@
 package ru.vsu.cs.shevchenko_daniil;
 
+import ru.vsu.cs.shevchenko_daniil.utils.SwingUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MaxSumRange {
@@ -16,14 +19,14 @@ public class MaxSumRange {
         int startIndex = 0;
         int maxSum = maxSumInSubArray(list);
         MaxSumRange maxSumRange = null;
-
         for (int endIndex = 0; endIndex < list.size(); endIndex++) {
             currSum += list.get(endIndex);
 
             if (maxSumRange == null || currSum >= maxSumRange.sum) {
-                if (currSum == maxSum && maxSumRange != null && endIndex - startIndex == maxSumRange.end - maxSumRange.start && maxSumRange.end != endIndex)
+                if (currSum == maxSum && maxSumRange != null && endIndex - startIndex >= maxSumRange.end - maxSumRange.start && maxSumRange.end != endIndex)
                     continue;
-                maxSumRange = new MaxSumRange(startIndex, endIndex, currSum);
+                if (currSum == maxSum)
+                    maxSumRange = new MaxSumRange(startIndex, endIndex, currSum);
             }
 
             if (currSum < 0) {
